@@ -17,7 +17,7 @@ function App() {
 			},
 			{
 				name: "Arms + Legs",
-				numExercises: 6,
+				numExercises: 7,
 			},
 			{
 				name: "Arms only",
@@ -29,7 +29,7 @@ function App() {
 			},
 			{
 				name: "Core only",
-				numExercises: partOfDay === "AM" ? 5 : 4,
+				numExercises: partOfDay === "AM" ? 6 : 5,
 			},
 		];
 	}, [partOfDay]);
@@ -48,7 +48,6 @@ function App() {
 		const id = setInterval(function () {
 			setTime(formatTime(new Date()));
 		}, 1000);
-
 		return () => clearInterval(id);
 	}, []);
 

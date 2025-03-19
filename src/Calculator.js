@@ -9,27 +9,30 @@ function Calculator({ workouts, allowSound }) {
 	const [duration, setDuration] = useState(0);
 
 	useEffect(() => {
+		const playSound = function () {
+			if (!allowSound) return;
+			const sound = new Audio(clickSound);
+			sound.play();
+		};
+		playSound();
+	}, [duration, allowSound]);
+
+	useEffect(() => {
 		setDuration((number * sets * speed) / 60 + (sets - 1) * durationBreak);
 	}, [number, sets, speed, durationBreak]);
 
 	const increaseDuration = () => {
-		setDuration((actualDuration) => actualDuration + 1);
+		setDuration((actualDuration) => Math.floor(actualDuration) + 1);
 	};
 
 	const decreaseDuration = () => {
 		setDuration((actualDuration) =>
-			actualDuration > 1 ? actualDuration - 1 : 0
+			actualDuration > 1 ? Math.ceil(actualDuration) - 1 : 0
 		);
 	};
 
 	const mins = Math.floor(duration);
 	const seconds = (duration - mins) * 60;
-
-	const playSound = function () {
-		if (!allowSound) return;
-		const sound = new Audio(clickSound);
-		sound.play();
-	};
 
 	return (
 		<>
